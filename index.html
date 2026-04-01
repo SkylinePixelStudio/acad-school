@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ACAD Online Tuition Center – Chennai | NCERT CBSE Classes 6–12</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --red:    #E8332A;
+    --orange: #F5871F;
+    --yellow: #F5C518;
+    --green:  #3AAB6F;
+    --teal:   #1ABCB0;
+    --blue:   #1A56DB;
+    --purple: #6C3FC7;
+    --pink:   #E91E8C;
+    --bg:     #EBF4FF;
+    --white:  #FFFFFF;
+    --dark:   #1A1F36;
+    --card:   #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--dark); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(90deg,var(--red),var(--orange),var(--yellow),var(--green),var(--blue),var(--purple),var(--pink)) 1;
+    padding: 10px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 2px 20px rgba(0,0,0,.08);
+  }
+  .nav-logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
+  .nav-logo svg { width:52px; height:52px; }
+  .nav-brand { font-family:'Baloo 2',cursive; font-size:1.4rem; font-weight:800; line-height:1.1; }
+  .nav-brand span { display:block; font-size:.7rem; font-weight:600; color:#666; letter-spacing:.08em; text-transform:uppercase; }
+  .nav-links { display:flex; gap:28px; list-style:none; }
+  .nav-links a { text-decoration:none; font-weight:700; font-size:.95rem; color:var(--dark); position:relative; transition:.2s; }
+  .nav-links a::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:2px; border-radius:2px; background:linear-gradient(90deg,var(--blue),var(--purple)); transition:.3s; }
+  .nav-links a:hover::after { width:100%; }
+  .nav-cta { background:linear-gradient(135deg,var(--blue),var(--purple)); color:#fff; border:none; border-radius:30px; padding:10px 24px; font-family:'Nunito',sans-serif; font-weight:800; font-size:.95rem; cursor:pointer; transition:.2s; box-shadow:0 4px 14px rgba(26,86,219,.3); }
+  .nav-cta:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(26,86,219,.4); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 90vh;
+    background: linear-gradient(150deg, #dbeeff 0%, #f0e8ff 40%, #ffe8f5 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden; padding: 60px 40px;
+  }
+  .hero-orbs { position:absolute; inset:0; pointer-events:none; }
+  .orb { position:absolute; border-radius:50%; filter:blur(60px); opacity:.35; animation:float 8s ease-in-out infinite; }
+  .orb1 { width:320px;height:320px;background:var(--blue); top:-80px;left:-80px; animation-delay:0s; }
+  .orb2 { width:260px;height:260px;background:var(--purple); top:50%;left:60%; animation-delay:2s; }
+  .orb3 { width:200px;height:200px;background:var(--pink); bottom:-60px;left:30%; animation-delay:4s; }
+  .orb4 { width:180px;height:180px;background:var(--teal); top:20%;right:-60px; animation-delay:1s; }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
+
+  .hero-inner { position:relative; z-index:1; display:flex; align-items:center; gap:60px; max-width:1100px; flex-wrap:wrap; justify-content:center; }
+  .hero-text { flex:1; min-width:300px; }
+  .hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.8); border:2px solid var(--blue); border-radius:30px; padding:6px 18px; font-size:.85rem; font-weight:700; color:var(--blue); margin-bottom:20px; animation:fadeDown .6s ease; }
+  .hero-badge .dot { width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.4)} }
+  @keyframes fadeDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
+
+  h1 { font-family:'Baloo 2',cursive; font-size:clamp(2.2rem,5vw,3.6rem); font-weight:800; line-height:1.15; margin-bottom:16px; animation:fadeUp .7s .1s both ease; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+  .rainbow-text {
+    background: linear-gradient(90deg,var(--red),var(--orange),var(--yellow),var(--green),var(--blue),var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip:text;
+  }
+  .hero-sub { font-size:1.1rem; color:#444; line-height:1.7; max-width:480px; margin-bottom:28px; animation:fadeUp .7s .2s both ease; }
+  .hero-btns { display:flex; gap:14px; flex-wrap:wrap; animation:fadeUp .7s .3s both ease; }
+  .btn-primary { background:linear-gradient(135deg,var(--red),var(--orange)); color:#fff; border:none; border-radius:30px; padding:14px 30px; font-family:'Nunito',sans-serif; font-weight:800; font-size:1rem; cursor:pointer; transition:.25s; box-shadow:0 4px 16px rgba(232,51,42,.3); text-decoration:none; display:inline-block; }
+  .btn-primary:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(232,51,42,.4); }
+  .btn-secondary { background:rgba(255,255,255,.85); color:var(--dark); border:2px solid var(--blue); border-radius:30px; padding:14px 30px; font-family:'Nunito',sans-serif; font-weight:800; font-size:1rem; cursor:pointer; transition:.25s; text-decoration:none; display:inline-block; }
+  .btn-secondary:hover { background:var(--blue); color:#fff; }
+
+  /* Hero logo area */
+  .hero-logo-wrap { flex-shrink:0; animation:fadeUp .7s .15s both ease; }
+  .hero-logo-wrap svg { width:260px; height:260px; filter:drop-shadow(0 20px 40px rgba(26,86,219,.2)); }
+
+  /* ── STATS ── */
+  .stats { display:flex; justify-content:center; gap:0; flex-wrap:wrap; background:#fff; box-shadow:0 4px 30px rgba(0,0,0,.08); }
+  .stat { flex:1; min-width:160px; padding:28px 20px; text-align:center; border-right:1px solid #eee; }
+  .stat:last-child { border-right:none; }
+  .stat-num { font-family:'Baloo 2',cursive; font-size:2.2rem; font-weight:800; }
+  .stat-label { font-size:.85rem; color:#666; font-weight:600; text-transform:uppercase; letter-spacing:.06em; }
+
+  /* ── SECTION ── */
+  section { padding:80px 40px; max-width:1200px; margin:0 auto; }
+  .section-tag { display:inline-block; background:linear-gradient(135deg,var(--blue),var(--purple)); color:#fff; border-radius:20px; padding:4px 16px; font-size:.78rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:12px; }
+  h2 { font-family:'Baloo 2',cursive; font-size:clamp(1.8rem,4vw,2.6rem); font-weight:800; margin-bottom:12px; }
+  .section-sub { color:#555; font-size:1rem; line-height:1.7; max-width:560px; margin-bottom:48px; }
+
+  /* ── GRADE CARDS ── */
+  .grades-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:20px; }
+  .grade-card {
+    background:#fff; border-radius:20px; padding:28px 20px; text-align:center;
+    box-shadow:0 4px 20px rgba(0,0,0,.07); cursor:pointer;
+    transition:.3s; position:relative; overflow:hidden;
+  }
+  .grade-card::before { content:''; position:absolute; inset:0; opacity:0; transition:.3s; }
+  .grade-card:hover { transform:translateY(-6px); box-shadow:0 12px 32px rgba(0,0,0,.13); }
+  .grade-card:hover::before { opacity:1; }
+  .grade-num { font-family:'Baloo 2',cursive; font-size:3rem; font-weight:800; line-height:1; }
+  .grade-label { font-size:.8rem; font-weight:700; color:#888; text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px; }
+  .grade-badge { display:inline-block; border-radius:12px; padding:3px 12px; font-size:.78rem; font-weight:700; color:#fff; }
+  .grade-subjects { margin-top:12px; font-size:.82rem; color:#555; line-height:1.6; }
+
+  .g6  { --c:#3AAB6F; } .g6  .grade-num{color:var(--c);} .g6  .grade-badge{background:var(--c);} .g6:hover  { border:2px solid var(--c); }
+  .g7  { --c:#1ABCB0; } .g7  .grade-num{color:var(--c);} .g7  .grade-badge{background:var(--c);} .g7:hover  { border:2px solid var(--c); }
+  .g8  { --c:#1A56DB; } .g8  .grade-num{color:var(--c);} .g8  .grade-badge{background:var(--c);} .g8:hover  { border:2px solid var(--c); }
+  .g9  { --c:#6C3FC7; } .g9  .grade-num{color:var(--c);} .g9  .grade-badge{background:var(--c);} .g9:hover  { border:2px solid var(--c); }
+  .g10 { --c:#E8332A; } .g10 .grade-num{color:var(--c);} .g10 .grade-badge{background:var(--c);} .g10:hover { border:2px solid var(--c); }
+  .g11s{ --c:#F5871F; } .g11s .grade-num{color:var(--c);} .g11s .grade-badge{background:var(--c);} .g11s:hover{ border:2px solid var(--c); }
+  .g11c{ --c:#E91E8C; } .g11c .grade-num{color:var(--c);} .g11c .grade-badge{background:var(--c);} .g11c:hover{ border:2px solid var(--c); }
+
+  /* ── SUBJECTS ── */
+  .subjects-bg { background:linear-gradient(135deg,#1a1f36 0%,#2d1b69 100%); padding:80px 40px; }
+  .subjects-bg h2, .subjects-bg .section-sub { color:#fff; }
+  .subjects-bg .section-sub { color:rgba(255,255,255,.7); }
+  .subjects-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:24px; }
+  .subject-card {
+    border-radius:20px; padding:32px 28px;
+    position:relative; overflow:hidden;
+    transition:.3s; cursor:pointer;
+  }
+  .subject-card:hover { transform:translateY(-6px) scale(1.02); }
+  .subject-icon { font-size:2.8rem; margin-bottom:14px; }
+  .subject-card h3 { font-family:'Baloo 2',cursive; font-size:1.35rem; font-weight:700; color:#fff; margin-bottom:8px; }
+  .subject-card p { font-size:.88rem; color:rgba(255,255,255,.8); line-height:1.6; margin-bottom:16px; }
+  .subject-grades { font-size:.78rem; font-weight:700; color:rgba(255,255,255,.6); letter-spacing:.08em; text-transform:uppercase; }
+  .sc1 { background:linear-gradient(135deg,#1A56DB,#1ABCB0); }
+  .sc2 { background:linear-gradient(135deg,#E8332A,#F5871F); }
+  .sc3 { background:linear-gradient(135deg,#6C3FC7,#E91E8C); }
+  .sc4 { background:linear-gradient(135deg,#3AAB6F,#1ABCB0); }
+  .sc5 { background:linear-gradient(135deg,#F5871F,#F5C518); }
+  .sc6 { background:linear-gradient(135deg,#E91E8C,#6C3FC7); }
+
+  /* ── SIMULATION SECTION ── */
+  .sim-section { padding:80px 40px; background:#fff; }
+  .sim-inner { max-width:1200px; margin:0 auto; }
+  .sim-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:28px; }
+  .sim-card {
+    border-radius:24px; overflow:hidden;
+    box-shadow:0 4px 24px rgba(0,0,0,.09); transition:.3s;
+  }
+  .sim-card:hover { transform:translateY(-6px); box-shadow:0 16px 40px rgba(0,0,0,.14); }
+  .sim-preview {
+    height:180px; display:flex; align-items:center; justify-content:center;
+    position:relative; overflow:hidden;
+  }
+  /* Physics pendulum animation */
+  .sim-physics { background:linear-gradient(135deg,#1A56DB,#1ABCB0); }
+  .pendulum { position:absolute; top:20px; left:50%; transform-origin:top center; animation:swing 2s ease-in-out infinite; }
+  @keyframes swing { 0%,100%{transform:rotate(30deg)} 50%{transform:rotate(-30deg)} }
+  .pend-line { width:2px;height:90px;background:rgba(255,255,255,.7);margin:0 auto; }
+  .pend-ball { width:22px;height:22px;border-radius:50%;background:#FFD700;margin:0 auto;box-shadow:0 0 12px rgba(255,215,0,.6); }
+  /* Chemistry Bohr model */
+  .sim-chem { background:linear-gradient(135deg,#6C3FC7,#E91E8C); }
+  .bohr-nucleus { width:28px;height:28px;border-radius:50%;background:#FFD700;position:absolute; box-shadow:0 0 16px rgba(255,215,0,.7); }
+  .orbit { position:absolute;border-radius:50%;border:1.5px solid rgba(255,255,255,.4); }
+  .orbit1 { width:70px;height:70px; }
+  .orbit2 { width:110px;height:110px; }
+  .orbit3 { width:155px;height:155px; }
+  .electron { width:8px;height:8px;border-radius:50%;background:#fff;position:absolute;top:0;left:50%;transform:translate(-50%,-50%); }
+  .orbit1 .electron { animation:revolve 1.5s linear infinite; }
+  .orbit2 .electron { animation:revolve 2.5s linear infinite reverse; }
+  .orbit3 .electron { animation:revolve 3.5s linear infinite; }
+  @keyframes revolve {
+    0%  { transform:rotate(0deg) translateX(35px) rotate(0deg); }
+    100%{ transform:rotate(360deg) translateX(35px) rotate(-360deg); }
+  }
+  .orbit2 .electron { animation:revolve2 2.5s linear infinite reverse; }
+  @keyframes revolve2 {
+    0%  { transform:rotate(0deg) translateX(55px) rotate(0deg); }
+    100%{ transform:rotate(360deg) translateX(55px) rotate(-360deg); }
+  }
+  .orbit3 .electron { animation:revolve3 3.5s linear infinite; }
+  @keyframes revolve3 {
+    0%  { transform:rotate(0deg) translateX(77.5px) rotate(0deg); }
+    100%{ transform:rotate(360deg) translateX(77.5px) rotate(-360deg); }
+  }
+  /* Math wave */
+  .sim-math { background:linear-gradient(135deg,#3AAB6F,#1ABCB0); }
+  .sim-math svg { width:280px; }
+  /* Electric circuit */
+  .sim-elec { background:linear-gradient(135deg,#E8332A,#F5871F); }
+  .circuit-glow { animation:glow 1.5s ease-in-out infinite; }
+  @keyframes glow { 0%,100%{opacity:.5} 50%{opacity:1} }
+  /* Bio cell */
+  .sim-bio { background:linear-gradient(135deg,#1ABCB0,#3AAB6F); }
+  .cell { border-radius:50%;border:3px solid rgba(255,255,255,.5);position:absolute;animation:breathe 3s ease-in-out infinite; }
+  @keyframes breathe { 0%,100%{transform:scale(1)} 50%{transform:scale(1.07)} }
+  /* Geography */
+  .sim-geo { background:linear-gradient(135deg,#F5871F,#F5C518); }
+
+  .sim-body { padding:24px 28px; background:#fff; }
+  .sim-body h3 { font-family:'Baloo 2',cursive; font-size:1.2rem; font-weight:700; margin-bottom:6px; }
+  .sim-body p { font-size:.85rem; color:#666; line-height:1.6; margin-bottom:14px; }
+  .sim-tags { display:flex; gap:8px; flex-wrap:wrap; }
+  .sim-tag { display:inline-block; border-radius:12px; padding:3px 12px; font-size:.75rem; font-weight:700; }
+
+  /* ── FEATURES ── */
+  .features-bg { background:linear-gradient(120deg,#f0e8ff,#dbeeff,#e8ffe8); padding:80px 40px; }
+  .features-inner { max-width:1200px; margin:0 auto; }
+  .features-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:28px; }
+  .feature-card { background:#fff; border-radius:20px; padding:32px 24px; box-shadow:0 4px 20px rgba(0,0,0,.07); transition:.3s; }
+  .feature-card:hover { transform:translateY(-4px); box-shadow:0 10px 30px rgba(0,0,0,.12); }
+  .feat-icon { font-size:2.4rem; margin-bottom:14px; }
+  .feature-card h3 { font-family:'Baloo 2',cursive; font-size:1.1rem; font-weight:700; margin-bottom:8px; }
+  .feature-card p { font-size:.85rem; color:#666; line-height:1.6; }
+
+  /* ── PROJECTS ── */
+  .projects-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:24px; }
+  .project-card { background:#fff; border-radius:20px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,.07); transition:.3s; }
+  .project-card:hover { transform:translateY(-5px); box-shadow:0 12px 32px rgba(0,0,0,.12); }
+  .project-head { height:100px; display:flex; align-items:center; justify-content:center; font-size:3rem; }
+  .project-body { padding:20px; }
+  .project-body h3 { font-family:'Baloo 2',cursive; font-size:1.05rem; font-weight:700; margin-bottom:6px; }
+  .project-body p { font-size:.82rem; color:#666; line-height:1.5; margin-bottom:12px; }
+  .project-meta { display:flex; gap:8px; align-items:center; }
+  .project-grade { font-size:.75rem; font-weight:700; padding:2px 10px; border-radius:10px; color:#fff; }
+  .project-subject { font-size:.75rem; color:#888; font-weight:600; }
+  .ph1 { background:linear-gradient(135deg,#dbeeff,#c5d5f5); }
+  .ph2 { background:linear-gradient(135deg,#ffe8e8,#ffd0d0); }
+  .ph3 { background:linear-gradient(135deg,#e8ffe8,#d0f0d0); }
+  .ph4 { background:linear-gradient(135deg,#f0e8ff,#e0d0ff); }
+  .ph5 { background:linear-gradient(135deg,#fff3e8,#ffe0c0); }
+  .ph6 { background:linear-gradient(135deg,#e8ffff,#c0f5f0); }
+  .ph7 { background:linear-gradient(135deg,#ffe8f5,#ffd0e8); }
+  .ph8 { background:linear-gradient(135deg,#fffff0,#fff3c0); }
+
+  /* ── ENROLL / CTA ── */
+  .cta-section { background:linear-gradient(135deg,var(--dark) 0%, #2d1b69 60%, #1a3a6b 100%); padding:100px 40px; text-align:center; }
+  .cta-section h2 { font-family:'Baloo 2',cursive; font-size:clamp(2rem,5vw,3rem); font-weight:800; color:#fff; margin-bottom:16px; }
+  .cta-section p { color:rgba(255,255,255,.75); font-size:1rem; line-height:1.7; max-width:520px; margin:0 auto 36px; }
+  .cta-form { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; max-width:560px; margin:0 auto 40px; }
+  .cta-form input { flex:1; min-width:220px; padding:14px 20px; border-radius:30px; border:2px solid rgba(255,255,255,.2); background:rgba(255,255,255,.1); color:#fff; font-family:'Nunito',sans-serif; font-size:.95rem; outline:none; }
+  .cta-form input::placeholder { color:rgba(255,255,255,.5); }
+  .cta-form input:focus { border-color:rgba(255,255,255,.5); }
+  .contact-row { display:flex; gap:32px; justify-content:center; flex-wrap:wrap; }
+  .contact-item { display:flex; align-items:center; gap:10px; color:rgba(255,255,255,.8); font-size:.9rem; font-weight:600; }
+  .contact-icon { width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem; }
+
+  /* ── FOOTER ── */
+  /* ── NETLIFY DEMO FORM ── */
+  .demo-form { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:20px; padding:32px; backdrop-filter:blur(10px); }
+  .form-row { display:flex; gap:16px; margin-bottom:16px; flex-wrap:wrap; }
+  .form-group { flex:1; min-width:200px; display:flex; flex-direction:column; gap:6px; }
+  .form-group label { color:rgba(255,255,255,.8); font-size:.82rem; font-weight:700; letter-spacing:.04em; }
+  .form-group input, .form-group select {
+    padding:13px 16px; border-radius:12px; border:1.5px solid rgba(255,255,255,.2);
+    background:rgba(255,255,255,.1); color:#fff; font-family:'Nunito',sans-serif;
+    font-size:.95rem; outline:none; transition:.2s; -webkit-appearance:none;
+  }
+  .form-group input::placeholder { color:rgba(255,255,255,.4); }
+  .form-group input:focus, .form-group select:focus { border-color:rgba(255,255,255,.6); background:rgba(255,255,255,.15); }
+  .form-group select option { background:#1a1f36; color:#fff; }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-8px)} 40%,80%{transform:translateX(8px)} }
+
+  footer { background:var(--dark); color:rgba(255,255,255,.5); text-align:center; padding:28px 40px; font-size:.85rem; border-top:4px solid transparent; border-image:linear-gradient(90deg,var(--red),var(--orange),var(--yellow),var(--green),var(--blue),var(--purple),var(--pink)) 1; }
+  footer strong { color:#fff; }
+
+  /* ── TICKER ── */
+  .ticker-wrap { background:linear-gradient(90deg,var(--blue),var(--purple),var(--pink),var(--orange),var(--red)); padding:12px 0; overflow:hidden; }
+  .ticker { display:flex; gap:60px; animation:ticker 30s linear infinite; white-space:nowrap; }
+  .ticker span { color:#fff; font-weight:700; font-size:.9rem; flex-shrink:0; }
+  @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { padding:80px 40px; background:#fff; }
+  .testimonials-inner { max-width:1100px; margin:0 auto; }
+  .testimonials-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:24px; }
+  .testi-card { border-radius:20px; padding:28px; border:2px solid #eee; transition:.3s; position:relative; }
+  .testi-card:hover { border-color:var(--blue); box-shadow:0 8px 24px rgba(26,86,219,.1); }
+  .testi-stars { color:#F5C518; font-size:1.1rem; margin-bottom:12px; }
+  .testi-text { font-size:.9rem; color:#555; line-height:1.7; margin-bottom:16px; font-style:italic; }
+  .testi-author { display:flex; align-items:center; gap:12px; }
+  .testi-avatar { width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;color:#fff; }
+  .testi-name { font-weight:700; font-size:.9rem; }
+  .testi-grade { font-size:.8rem; color:#888; }
+
+  /* Floating elements */
+  .floating-stars { position:fixed; pointer-events:none; z-index:0; inset:0; overflow:hidden; }
+  .fstar { position:absolute; font-size:1rem; opacity:.15; animation:flt 6s ease-in-out infinite; }
+  @keyframes flt { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-15px) rotate(180deg)} }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <!-- Inline SVG recreation of ACAD logo -->
+    <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="60" cy="60" r="58" fill="#EBF4FF"/>
+      <!-- Arc text: ONLINE TUITION CENTER -->
+      <path id="arc" d="M 18,60 A 42,42 0 1,1 102,60" fill="none"/>
+      <text font-family="Nunito,sans-serif" font-weight="800" font-size="9" letter-spacing="1">
+        <textPath href="#arc" startOffset="8%">
+          <tspan fill="#1A56DB">ONLINE </tspan><tspan fill="#F5871F">TUITION </tspan><tspan fill="#1A56DB">CENTER</tspan>
+        </textPath>
+      </text>
+      <!-- Book icon -->
+      <g transform="translate(18,54) scale(0.82)">
+        <path d="M4 8 Q8 4 14 8 L14 28 Q8 24 4 28 Z" fill="#1ABCB0"/>
+        <path d="M14 8 Q20 4 26 8 L26 28 Q20 24 14 28 Z" fill="#6C3FC7"/>
+        <ellipse cx="14" cy="28" rx="10" ry="3" fill="rgba(0,0,0,.1)"/>
+        <!-- Arrow -->
+        <line x1="18" y1="14" x2="23" y2="5" stroke="#1A56DB" stroke-width="2.5" stroke-linecap="round"/>
+        <polygon points="23,2 26,8 20,7" fill="#1A56DB"/>
+      </g>
+      <!-- ACAD text -->
+      <text x="44" y="77" font-family="Nunito,sans-serif" font-weight="900" font-size="22" letter-spacing="-0.5">
+        <tspan fill="#E8332A">A</tspan><tspan fill="#F5871F">C</tspan><tspan fill="#3AAB6F">A</tspan><tspan fill="#1A56DB">D</tspan>
+      </text>
+      <!-- CHENNAI -->
+      <text x="60" y="100" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="8" fill="#6C3FC7" letter-spacing="2">CHENNAI</text>
+      <!-- Decorative stars -->
+      <text x="8" y="65" font-size="7" fill="#F5C518">★</text>
+      <text x="8" y="74" font-size="7" fill="#3AAB6F">✦</text>
+      <text x="105" y="60" font-size="7" fill="#E91E8C">✦</text>
+      <text x="105" y="70" font-size="7" fill="#1A56DB">✦</text>
+    </svg>
+    <div class="nav-brand">
+      ACAD <span style="background:linear-gradient(90deg,var(--red),var(--orange),var(--yellow),var(--green),var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Online Tuition Center</span>
+      <span>Chennai • CBSE / NCERT • Class 6–12</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#simulations">Simulations</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#features">Why ACAD</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('enroll').scrollIntoView({behavior:'smooth'})">Enroll Now 🚀</button>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>📚 CBSE / NCERT Classes 6 to 12</span>
+    <span>🔬 Live Science Simulations</span>
+    <span>🧮 Interactive Math Projects</span>
+    <span>⚗️ Chemistry Lab Models</span>
+    <span>🌍 Social Science Visualizations</span>
+    <span>💻 Online Live Classes</span>
+    <span>🏆 Board Exam Excellence</span>
+    <span>📍 Based in Chennai, Tamil Nadu</span>
+    <span>📚 CBSE / NCERT Classes 6 to 12</span>
+    <span>🔬 Live Science Simulations</span>
+    <span>🧮 Interactive Math Projects</span>
+    <span>⚗️ Chemistry Lab Models</span>
+    <span>🌍 Social Science Visualizations</span>
+    <span>💻 Online Live Classes</span>
+    <span>🏆 Board Exam Excellence</span>
+    <span>📍 Based in Chennai, Tamil Nadu</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-orbs">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+    <div class="orb orb4"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge"><span class="dot"></span> Now Enrolling – Session 2025–26</div>
+      <h1>Master <span class="rainbow-text">CBSE & NCERT</span><br/>with Fun Simulations &<br/>Mini Projects</h1>
+      <p class="hero-sub">Expert-guided online tuition for Classes 6–12 from Chennai. Concepts come alive through interactive simulations, hands-on projects, and personalised mentorship.</p>
+      <div class="hero-btns">
+        <a href="#enroll" class="btn-primary">Join Free Demo Class 🎯</a>
+        <a href="#courses" class="btn-secondary">Explore Courses</a>
+      </div>
+    </div>
+    <div class="hero-logo-wrap">
+      <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="120" cy="120" r="115" fill="#EBF4FF"/>
+        <path id="arc2" d="M 25,120 A 95,95 0 1,1 215,120" fill="none"/>
+        <text font-family="Nunito,sans-serif" font-weight="800" font-size="16" letter-spacing="3">
+          <textPath href="#arc2" startOffset="7%">
+            <tspan fill="#1A56DB">ONLINE  </tspan><tspan fill="#F5871F">TUITION  </tspan><tspan fill="#1A56DB">CENTER</tspan>
+          </textPath>
+        </text>
+        <!-- Book -->
+        <g transform="translate(22,100) scale(1.6)">
+          <path d="M4 8 Q8 4 14 8 L14 28 Q8 24 4 28 Z" fill="#1ABCB0"/>
+          <path d="M14 8 Q20 4 26 8 L26 28 Q20 24 14 28 Z" fill="#6C3FC7"/>
+          <ellipse cx="14" cy="27" rx="10" ry="3" fill="rgba(0,0,0,.15)"/>
+          <line x1="18" y1="14" x2="24" y2="4" stroke="#1A56DB" stroke-width="2.5" stroke-linecap="round"/>
+          <polygon points="24,1 28,8 21,8" fill="#1A56DB"/>
+        </g>
+        <!-- ACAD -->
+        <text x="65" y="145" font-family="Nunito,sans-serif" font-weight="900" font-size="52" letter-spacing="-1">
+          <tspan fill="#E8332A">A</tspan><tspan fill="#F5871F">C</tspan><tspan fill="#3AAB6F">A</tspan><tspan fill="#1A56DB">D</tspan>
+        </text>
+        <!-- CHENNAI arc bottom -->
+        <path id="arc3" d="M 40,130 A 80,80 0 0,0 200,120" fill="none"/>
+        <text font-family="Nunito,sans-serif" font-weight="800" font-size="14" letter-spacing="4">
+          <textPath href="#arc3" startOffset="32%"><tspan fill="#6C3FC7">CHENNAI</tspan></textPath>
+        </text>
+        <!-- Stars -->
+        <text x="19" y="130" font-size="12" fill="#F5C518">★</text>
+        <text x="20" y="148" font-size="12" fill="#3AAB6F">✦</text>
+        <text x="28" y="165" font-size="12" fill="#F5871F">★</text>
+        <text x="214" y="125" font-size="12" fill="#E91E8C">✦</text>
+        <text x="210" y="143" font-size="12" fill="#1A56DB">✦</text>
+        <text x="204" y="160" font-size="12" fill="#E91E8C">✦</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num" style="color:var(--blue)">500+</div><div class="stat-label">Students Enrolled</div></div>
+  <div class="stat"><div class="stat-num" style="color:var(--green)">7</div><div class="stat-label">Grade Levels</div></div>
+  <div class="stat"><div class="stat-num" style="color:var(--orange)">50+</div><div class="stat-label">Simulations</div></div>
+  <div class="stat"><div class="stat-num" style="color:var(--purple)">100+</div><div class="stat-label">NCERT Projects</div></div>
+  <div class="stat"><div class="stat-num" style="color:var(--red)">98%</div><div class="stat-label">Board Pass Rate</div></div>
+</div>
+
+<!-- COURSES BY GRADE -->
+<section id="courses">
+  <div class="section-tag">📚 Our Courses</div>
+  <h2>Classes <span class="rainbow-text">6th to 12th</span> — CBSE / NCERT</h2>
+  <p class="section-sub">Choose your grade and dive into curated lessons, simulations, and projects — designed to make board exam prep exciting and effective.</p>
+  <div class="grades-grid">
+    <div class="grade-card g6">
+      <div class="grade-label">Class</div>
+      <div class="grade-num">6</div>
+      <div class="grade-badge">Foundational</div>
+      <div class="grade-subjects">Science · Maths · Social<br/>English · Hindi</div>
+    </div>
+    <div class="grade-card g7">
+      <div class="grade-label">Class</div>
+      <div class="grade-num">7</div>
+      <div class="grade-badge">Explorers</div>
+      <div class="grade-subjects">Science · Maths · History<br/>Geography · Civics</div>
+    </div>
+    <div class="grade-card g8">
+      <div class="grade-label">Class</div>
+      <div class="grade-num">8</div>
+      <div class="grade-badge">Builders</div>
+      <div class="grade-subjects">Science · Maths · Economics<br/>Polity · English</div>
+    </div>
+    <div class="grade-card g9">
+      <div class="grade-label">Class</div>
+      <div class="grade-num">9</div>
+      <div class="grade-badge">Achievers</div>
+      <div class="grade-subjects">Physics · Chemistry · Bio<br/>Maths · Social Science</div>
+    </div>
+    <div class="grade-card g10">
+      <div class="grade-label">Class</div>
+      <div class="grade-num">10</div>
+      <div class="grade-badge">Board Ready</div>
+      <div class="grade-subjects">Science · Maths · SST<br/>English · Hindi · Sanskrit</div>
+    </div>
+    <div class="grade-card g11s">
+      <div class="grade-label">Class</div>
+      <div class="grade-num">11</div>
+      <div class="grade-badge">Science Stream</div>
+      <div class="grade-subjects">Physics · Chemistry · Bio<br/>Maths · Computer Sci.</div>
+    </div>
+    <div class="grade-card g11c" style="--c:#E91E8C">
+      <div class="grade-label">Class</div>
+      <div class="grade-num" style="color:var(--c)">12</div>
+      <div class="grade-badge" style="background:var(--c)">Board Prep</div>
+      <div class="grade-subjects">Physics · Chemistry · Bio<br/>Maths · Accountancy</div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBJECTS -->
+<div class="subjects-bg">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-tag" style="background:rgba(255,255,255,.2);">🎯 Subject Specialties</div>
+    <h2>Deep-Dive Subject <span style="color:#F5C518">Courses</span></h2>
+    <p class="section-sub">Every subject taught by expert educators with CBSE-aligned curriculum, real-world examples, and exam pattern practice.</p>
+  </div>
+  <div class="subjects-grid">
+    <div class="subject-card sc1">
+      <div class="subject-icon">⚡</div>
+      <h3>Physics</h3>
+      <p>Laws of Motion, Electricity, Magnetism, Optics and Modern Physics — with live simulation labs for every chapter.</p>
+      <div class="subject-grades">Classes 9, 10, 11, 12</div>
+    </div>
+    <div class="subject-card sc2">
+      <div class="subject-icon">⚗️</div>
+      <h3>Chemistry</h3>
+      <p>Periodic table, Chemical reactions, Acids & Bases, Organic Chemistry — virtual lab experiments included.</p>
+      <div class="subject-grades">Classes 9, 10, 11, 12</div>
+    </div>
+    <div class="subject-card sc3">
+      <div class="subject-icon">🧬</div>
+      <h3>Biology</h3>
+      <p>Cell structure, Genetics, Ecosystems, Human body systems with 3D cell simulations and diagrams.</p>
+      <div class="subject-grades">Classes 9, 10, 11, 12</div>
+    </div>
+    <div class="subject-card sc4">
+      <div class="subject-icon">📐</div>
+      <h3>Mathematics</h3>
+      <p>Algebra, Geometry, Trigonometry, Calculus and Statistics — from arithmetic to advanced problem solving.</p>
+      <div class="subject-grades">Classes 6 to 12</div>
+    </div>
+    <div class="subject-card sc5">
+      <div class="subject-icon">🌍</div>
+      <h3>Social Science</h3>
+      <p>History timelines, Geography maps, Civics, Political Science with interactive visualisations and debates.</p>
+      <div class="subject-grades">Classes 6 to 10</div>
+    </div>
+    <div class="subject-card sc6">
+      <div class="subject-icon">💻</div>
+      <h3>Computer Science</h3>
+      <p>Python programming, Data Structures, Algorithms and Networking — with live coding environment.</p>
+      <div class="subject-grades">Classes 11, 12</div>
+    </div>
+  </div>
+</div>
+
+<!-- SIMULATIONS -->
+<div class="sim-section" id="simulations">
+  <div class="sim-inner">
+    <div class="section-tag">🔬 Interactive Simulations</div>
+    <h2>Concepts That <span class="rainbow-text">Come Alive</span></h2>
+    <p class="section-sub">Our embedded simulations turn abstract NCERT concepts into visual, interactive experiences you can explore right in your browser.</p>
+    <div class="sim-grid">
+
+      <!-- Physics Pendulum -->
+      <div class="sim-card">
+        <div class="sim-preview sim-physics">
+          <div class="pendulum">
+            <div class="pend-line"></div>
+            <div class="pend-ball"></div>
+          </div>
+          <div style="position:absolute;bottom:14px;left:0;right:0;text-align:center;color:rgba(255,255,255,.7);font-size:.78rem;font-weight:600">Simple Pendulum – T = 2π√(L/g)</div>
+        </div>
+        <div class="sim-body">
+          <h3>⚡ Pendulum & SHM</h3>
+          <p>Visualise period, amplitude and frequency. Adjust length and gravity to see real-time changes.</p>
+          <div class="sim-tags">
+            <span class="sim-tag" style="background:#dbeeff;color:#1A56DB">Class 9</span>
+            <span class="sim-tag" style="background:#e8ffe8;color:#3AAB6F">Physics</span>
+            <span class="sim-tag" style="background:#f0e8ff;color:#6C3FC7">NCERT Ch.8</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chemistry Bohr Model -->
+      <div class="sim-card">
+        <div class="sim-preview sim-chem" style="overflow:hidden;">
+          <div style="position:relative;width:160px;height:160px;display:flex;align-items:center;justify-content:center;">
+            <div class="orbit orbit1"><div class="electron"></div></div>
+            <div class="orbit orbit2"><div class="electron" style="animation:revolve2 2.5s linear infinite;"></div></div>
+            <div class="orbit orbit3"><div class="electron" style="animation:revolve3 3.5s linear infinite;"></div></div>
+            <div class="bohr-nucleus" style="position:relative;z-index:2"></div>
+          </div>
+        </div>
+        <div class="sim-body">
+          <h3>⚗️ Bohr's Atomic Model</h3>
+          <p>Watch electrons orbit the nucleus. Understand energy levels, shells and quantum transitions.</p>
+          <div class="sim-tags">
+            <span class="sim-tag" style="background:#ffe8f5;color:#E91E8C">Class 10</span>
+            <span class="sim-tag" style="background:#f0e8ff;color:#6C3FC7">Chemistry</span>
+            <span class="sim-tag" style="background:#fff3e8;color:#F5871F">NCERT Ch.4</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Math Sine Wave -->
+      <div class="sim-card">
+        <div class="sim-preview sim-math">
+          <svg viewBox="0 0 280 120" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="60" x2="280" y2="60" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+            <path id="wave" d="M0,60" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/>
+            <text x="10" y="20" fill="rgba(255,255,255,.7)" font-size="11" font-family="Nunito,sans-serif">y = A·sin(ωx + φ)</text>
+          </svg>
+          <script>
+            (function(){
+              var p='',t=0;
+              function draw(){
+                var d='M0,60';
+                for(var x=1;x<280;x++){d+=' L'+x+','+(60-45*Math.sin((x/30)+t));}
+                document.getElementById('wave').setAttribute('d',d);
+                t+=0.05; requestAnimationFrame(draw);
+              }
+              draw();
+            })();
+          </script>
+        </div>
+        <div class="sim-body">
+          <h3>📐 Trigonometric Waves</h3>
+          <p>Live sine/cosine wave animation. Adjust amplitude, frequency and phase to see changes instantly.</p>
+          <div class="sim-tags">
+            <span class="sim-tag" style="background:#e8ffe8;color:#3AAB6F">Class 11</span>
+            <span class="sim-tag" style="background:#dbeeff;color:#1A56DB">Maths</span>
+            <span class="sim-tag" style="background:#ffe8f5;color:#E91E8C">NCERT Ch.3</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Electric Circuit -->
+      <div class="sim-card">
+        <div class="sim-preview sim-elec">
+          <svg viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg">
+            <!-- Circuit lines -->
+            <rect x="30" y="30" width="200" height="70" rx="4" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2"/>
+            <!-- Battery -->
+            <line x1="30" y1="55" x2="30" y2="45" stroke="white" stroke-width="4"/>
+            <line x1="30" y1="75" x2="30" y2="85" stroke="white" stroke-width="4"/>
+            <text x="12" y="70" fill="white" font-size="9" font-family="Nunito,sans-serif">+</text>
+            <!-- Bulb symbol -->
+            <circle cx="160" cy="65" r="14" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2"/>
+            <line x1="153" y1="58" x2="167" y2="72" stroke="rgba(255,255,255,.7)" stroke-width="1.5"/>
+            <line x1="167" y1="58" x2="153" y2="72" stroke="rgba(255,255,255,.7)" stroke-width="1.5"/>
+            <!-- Resistor -->
+            <rect x="90" y="58" width="30" height="14" rx="3" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2"/>
+            <!-- Current dots -->
+            <circle class="circuit-glow" cx="75" cy="30" r="4" fill="#FFD700"/>
+            <circle class="circuit-glow" cx="160" cy="100" r="4" fill="#FFD700" style="animation-delay:.5s"/>
+            <circle class="circuit-glow" cx="220" cy="65" r="4" fill="#FFD700" style="animation-delay:1s"/>
+            <text x="85" y="120" fill="rgba(255,255,255,.6)" font-size="9" font-family="Nunito,sans-serif">V = IR  (Ohm's Law)</text>
+          </svg>
+        </div>
+        <div class="sim-body">
+          <h3>⚡ Electric Circuits</h3>
+          <p>Build and test series/parallel circuits. See Ohm's Law in action with live voltage and current displays.</p>
+          <div class="sim-tags">
+            <span class="sim-tag" style="background:#ffe8e8;color:#E8332A">Class 10</span>
+            <span class="sim-tag" style="background:#dbeeff;color:#1A56DB">Physics</span>
+            <span class="sim-tag" style="background:#e8ffe8;color:#3AAB6F">NCERT Ch.12</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cell Biology -->
+      <div class="sim-card">
+        <div class="sim-preview sim-bio">
+          <div style="position:relative;width:150px;height:140px;display:flex;align-items:center;justify-content:center;">
+            <div class="cell" style="width:140px;height:130px;border-color:rgba(255,255,255,.6)"></div>
+            <div class="cell" style="width:100px;height:90px;border-color:rgba(255,255,255,.4);animation-delay:.5s;background:rgba(255,255,255,.06)"></div>
+            <!-- Nucleus -->
+            <div style="width:50px;height:46px;border-radius:50%;background:rgba(255,215,0,.4);border:2px solid rgba(255,215,0,.7);display:flex;align-items:center;justify-content:center;">
+              <div style="width:16px;height:16px;border-radius:50%;background:rgba(255,215,0,.8)"></div>
+            </div>
+          </div>
+          <div style="position:absolute;bottom:10px;color:rgba(255,255,255,.7);font-size:.75rem;font-weight:600">Plant / Animal Cell</div>
+        </div>
+        <div class="sim-body">
+          <h3>🧬 Cell Structure</h3>
+          <p>3D animated cell models showing nucleus, mitochondria, chloroplasts and all organelles.</p>
+          <div class="sim-tags">
+            <span class="sim-tag" style="background:#e8ffff;color:#1ABCB0">Class 9</span>
+            <span class="sim-tag" style="background:#f0e8ff;color:#6C3FC7">Biology</span>
+            <span class="sim-tag" style="background:#ffe8f5;color:#E91E8C">NCERT Ch.5</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Geography Map -->
+      <div class="sim-card">
+        <div class="sim-preview sim-geo">
+          <svg viewBox="0 0 260 140" xmlns="http://www.w3.org/2000/svg">
+            <!-- Simplified India outline placeholder -->
+            <path d="M 90,20 L 170,18 L 185,50 L 175,80 L 155,110 L 130,128 L 105,110 L 90,85 L 80,55 Z" fill="rgba(255,255,255,.3)" stroke="white" stroke-width="2"/>
+            <!-- Rivers -->
+            <path d="M 100,35 Q 130,55 110,80" fill="none" stroke="#1A56DB" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <path d="M 155,30 Q 140,60 150,90" fill="none" stroke="#1A56DB" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <!-- Labels -->
+            <circle cx="130" cy="65" r="4" fill="#E8332A"/>
+            <text x="135" y="68" fill="white" font-size="8" font-family="Nunito,sans-serif">Delhi</text>
+            <circle cx="110" cy="100" r="4" fill="#E8332A"/>
+            <text x="115" y="103" fill="white" font-size="8" font-family="Nunito,sans-serif">Mumbai</text>
+            <circle cx="148" cy="105" r="4" fill="#E8332A"/>
+            <text x="153" y="108" fill="white" font-size="8" font-family="Nunito,sans-serif">Chennai</text>
+            <text x="90" y="135" fill="rgba(255,255,255,.7)" font-size="9" font-family="Nunito,sans-serif">Physical Map of India</text>
+          </svg>
+        </div>
+        <div class="sim-body">
+          <h3>🌍 Geography Maps</h3>
+          <p>Interactive India and World maps — rivers, mountains, climate zones and political boundaries.</p>
+          <div class="sim-tags">
+            <span class="sim-tag" style="background:#fff3e8;color:#F5871F">Class 6–10</span>
+            <span class="sim-tag" style="background:#e8ffe8;color:#3AAB6F">Geography</span>
+            <span class="sim-tag" style="background:#dbeeff;color:#1A56DB">NCERT Maps</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MINI PROJECTS -->
+<section id="projects">
+  <div class="section-tag">🛠️ Mini Projects</div>
+  <h2>NCERT-Based <span class="rainbow-text">Mini Projects</span></h2>
+  <p class="section-sub">Hands-on, curriculum-aligned projects that strengthen understanding and make excellent school submissions — one per chapter, every grade.</p>
+  <div class="projects-grid">
+    <div class="project-card"><div class="project-head ph1">🌱</div><div class="project-body"><h3>Germination Observation Journal</h3><p>Track seed germination daily, document variables: light, water, soil type.</p><div class="project-meta"><span class="project-grade" style="background:var(--green)">Class 6</span><span class="project-subject">Science</span></div></div></div>
+    <div class="project-card"><div class="project-head ph2">🌡️</div><div class="project-body"><h3>Heat Transfer Experiment</h3><p>Compare conduction, convection and radiation using everyday materials.</p><div class="project-meta"><span class="project-grade" style="background:var(--orange)">Class 7</span><span class="project-subject">Science</span></div></div></div>
+    <div class="project-card"><div class="project-head ph3">📊</div><div class="project-body"><h3>Data & Graphs – Rainfall Chart</h3><p>Collect local rain data and represent with bar, pie and line graphs.</p><div class="project-meta"><span class="project-grade" style="background:var(--teal)">Class 8</span><span class="project-subject">Maths</span></div></div>
+    </div>
+    <div class="project-card"><div class="project-head ph4">⚗️</div><div class="project-body"><h3>Acids & Bases pH Test</h3><p>Test household liquids with turmeric/litmus indicator and record results.</p><div class="project-meta"><span class="project-grade" style="background:var(--purple)">Class 9</span><span class="project-subject">Chemistry</span></div></div></div>
+    <div class="project-card"><div class="project-head ph5">🔋</div><div class="project-body"><h3>Build a Simple Electric Circuit</h3><p>Series and parallel circuits with bulbs and batteries – measure current & voltage.</p><div class="project-meta"><span class="project-grade" style="background:var(--red)">Class 10</span><span class="project-subject">Physics</span></div></div></div>
+    <div class="project-card"><div class="project-head ph6">🧪</div><div class="project-body"><h3>Saponification – Make Soap</h3><p>Lab project on ester hydrolysis; document the reaction step by step.</p><div class="project-meta"><span class="project-grade" style="background:var(--blue)">Class 11</span><span class="project-subject">Chemistry</span></div></div></div>
+    <div class="project-card"><div class="project-head ph7">📡</div><div class="project-body"><h3>Electromagnetic Induction Model</h3><p>Build a working generator model and record EMF vs coil turns data.</p><div class="project-meta"><span class="project-grade" style="background:var(--pink)">Class 12</span><span class="project-subject">Physics</span></div></div></div>
+    <div class="project-card"><div class="project-head ph8">🗺️</div><div class="project-body"><h3>Local Area Resource Map</h3><p>Survey your locality, mark water bodies, roads, land use on a hand-drawn map.</p><div class="project-meta"><span class="project-grade" style="background:var(--yellow);color:#333">Class 7</span><span class="project-subject">Geography</span></div></div></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<div class="features-bg" id="features">
+  <div class="features-inner">
+    <div class="section-tag">✨ Why ACAD</div>
+    <h2>The ACAD <span class="rainbow-text">Advantage</span></h2>
+    <p class="section-sub">We don't just teach — we ignite curiosity through the perfect blend of technology, personalised care and board-focused strategy.</p>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feat-icon">👩‍🏫</div><h3>Expert Educators</h3><p>Dedicated subject teachers from Chennai with 10+ years of CBSE coaching experience, handpicked for clarity and passion.</p></div>
+      <div class="feature-card"><div class="feat-icon">🔬</div><h3>Simulation Labs</h3><p>50+ interactive NCERT simulations that let students experiment virtually — no equipment needed, all from home.</p></div>
+      <div class="feature-card"><div class="feat-icon">📝</div><h3>Chapter-wise Projects</h3><p>100+ mini projects aligned to NCERT chapters — perfect for internal assessments, school exhibitions and deep understanding.</p></div>
+      <div class="feature-card"><div class="feat-icon">📅</div><h3>Flexible Live Classes</h3><p>Morning, afternoon and evening batches. Recorded sessions available for 30 days so you never miss a lesson.</p></div>
+      <div class="feature-card"><div class="feat-icon">🏆</div><h3>Board Exam Strategy</h3><p>Previous 10-year paper analysis, chapter-wise weightage planning and mock tests modelled on actual CBSE exams.</p></div>
+      <div class="feature-card"><div class="feat-icon">👨‍👩‍👦</div><h3>Parent Dashboard</h3><p>Real-time attendance, test scores, homework completion and teacher feedback — always in the loop.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div class="testimonials">
+  <div class="testimonials-inner">
+    <div class="section-tag">💬 What Parents Say</div>
+    <h2>Trusted by <span class="rainbow-text">Chennai Families</span></h2>
+    <p class="section-sub" style="margin-bottom:40px;">Our students consistently outperform in board exams and develop a genuine love for learning.</p>
+    <div class="testimonials-grid">
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"The simulations made Physics so visual for my daughter. She went from struggling to scoring 92% in boards. ACAD has been transformative."</p><div class="testi-author"><div class="testi-avatar" style="background:var(--blue)">P</div><div><div class="testi-name">Preethi S</div><div class="testi-grade">Parent of Class 10 student</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"My daughter's Chemistry marks jumped from 65 to 88. The virtual lab experiments were engaging and incredibly helpful for practicals too."</p><div class="testi-author"><div class="testi-avatar" style="background:var(--green)">K</div><div><div class="testi-name">Suresh K</div><div class="testi-grade">Parent of Class 12 student</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"The mini projects my child did for Class 8 won first prize at the school science exhibition. The ACAD project guide was excellent!"</p><div class="testi-author"><div class="testi-avatar" style="background:var(--purple)">S</div><div><div class="testi-name">Sunitha Balaji</div><div class="testi-grade">Parent of Class 8 student</div></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ENROLL / CTA -->
+<div class="cta-section" id="enroll">
+  <div class="section-tag" style="background:rgba(255,255,255,.15);color:#fff">🚀 Get Started</div>
+  <h2>Start Your <span style="color:#F5C518">Free Demo</span> Class Today</h2>
+  <p>Experience an ACAD lesson with interactive simulations — completely free, no commitment. Classes available online from anywhere in India.</p>
+
+  <!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  NETLIFY SETUP CHECKLIST (do once in Netlify dashboard)      ║
+  ║                                                              ║
+  ║  1. Deploy site → Forms tab will auto-detect "demo-booking"  ║
+  ║  2. Site → Forms → demo-booking → Form notifications         ║
+  ║     → Add notification → Email notification                  ║
+  ║       • Email to: acadcoachingcenter@gmail.com  (your email) ║
+  ║       • Reply-To field: email            ← auto-reply        ║
+  ║       • Subject: New Demo Booking – {{child-name}}           ║
+  ║  3. Add a second notification → Email notification           ║
+  ║       • Email to: {{email}}              ← parent's email    ║
+  ║       • Subject: Your ACAD Demo Class is Confirmed! 🎓       ║
+  ║       • Body: (paste the template from the comment below)    ║
+  ╚══════════════════════════════════════════════════════════════╝
+
+  AUTO-REPLY EMAIL TEMPLATE (paste in Netlify "Email to submitter" body):
+  ──────────────────────────────────────────────────────────────────
+  Dear Parent,
+
+  Thank you for booking a Free Demo Class at ACAD Online Tuition Center, Chennai! 🎓
+
+  We have received the following details:
+  • Child's Name : {{child-name}}
+  • Class        : {{class}}
+  • Subject      : {{subject}}
+  • WhatsApp     : {{whatsapp}}
+
+  Our team will contact you on WhatsApp within 30 minutes to confirm your slot.
+
+  For immediate assistance, WhatsApp us: +91 97908 18436
+
+  Warm regards,
+  ACAD Online Tuition Center
+  Chennai | CBSE / NCERT Classes 6–12
+  ──────────────────────────────────────────────────────────────────
+  -->
+
+  <!-- ── NETLIFY FORM (hidden, required for Netlify to detect at build time) ── -->
+  <form name="demo-booking" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text"  name="child-name"/>
+    <input type="text"  name="class"/>
+    <input type="email" name="email"/>
+    <input type="tel"   name="whatsapp"/>
+    <input type="text"  name="subject"/>
+  </form>
+
+  <!-- ── VISIBLE FORM ── -->
+  <div id="form-wrap" style="max-width:600px;margin:0 auto 40px;">
+
+    <!-- Step 1: Form -->
+    <div id="form-state">
+      <div class="demo-form">
+        <!-- Honeypot – hidden from humans -->
+        <p style="display:none"><label>Don't fill this out: <input name="bot-field"/></label></p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>👦 Child's Name</label>
+            <input id="f-name" type="text" placeholder="e.g. Arjun Kumar" required/>
+          </div>
+          <div class="form-group">
+            <label>🎓 Class</label>
+            <select id="f-class">
+              <option value="">Select Class</option>
+              <option>Class 6</option><option>Class 7</option><option>Class 8</option>
+              <option>Class 9</option><option>Class 10</option>
+              <option>Class 11 – Science</option><option>Class 11 – Commerce</option>
+              <option>Class 12 – Science</option><option>Class 12 – Commerce</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>📧 Parent's Email <span style="color:rgba(255,255,255,.45);font-weight:400;font-size:.75rem">(confirmation sent here)</span></label>
+            <input id="f-email" type="email" name="email" placeholder="parent@gmail.com" required/>
+          </div>
+          <div class="form-group">
+            <label>📱 WhatsApp Number</label>
+            <input id="f-phone" type="tel" placeholder="+91 98765 43210" required/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>📚 Subject of Interest</label>
+            <select id="f-subject">
+              <option value="">All Subjects</option>
+              <option>Mathematics</option><option>Physics</option><option>Chemistry</option>
+              <option>Biology</option><option>Social Science</option><option>Computer Science</option><option>English</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>🕐 Preferred Time Slot</label>
+            <select id="f-slot">
+              <option value="">Any Time</option>
+              <option>Morning (7 AM – 10 AM)</option>
+              <option>Afternoon (12 PM – 3 PM)</option>
+              <option>Evening (5 PM – 8 PM)</option>
+              <option>Weekend Only</option>
+            </select>
+          </div>
+        </div>
+        <button id="submit-btn" class="btn-primary" style="width:100%;padding:16px;font-size:1.05rem;border-radius:14px;margin-top:8px;" onclick="handleDemoSubmit(event)">
+          Book My Free Demo Class 🎯
+        </button>
+        <p style="color:rgba(255,255,255,.45);font-size:.78rem;margin-top:12px;">
+          🔒 Your details are safe. No spam, ever. You'll receive a confirmation email + WhatsApp message immediately.
+        </p>
+      </div>
+    </div>
+
+    <!-- Step 2: Success State -->
+    <div id="success-state" style="display:none;text-align:center;padding:40px 20px;animation:fadeUp .5s ease;">
+      <div style="font-size:4rem;margin-bottom:16px;">🎉</div>
+      <h3 style="font-family:'Baloo 2',cursive;font-size:1.8rem;color:#fff;margin-bottom:10px;">You're all set!</h3>
+      <p style="color:rgba(255,255,255,.75);font-size:1rem;line-height:1.7;margin-bottom:8px;">
+        We've received your demo request. <strong style="color:#F5C518">Check your email</strong> for a confirmation — then chat with us on WhatsApp to lock in your slot! 🚀
+      </p>
+      <p id="success-email-note" style="color:rgba(255,255,255,.5);font-size:.82rem;margin-bottom:24px;"></p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+        <a id="wa-link" href="#" target="_blank" class="btn-primary" style="background:linear-gradient(135deg,#25D366,#128C7E);border-radius:30px;padding:14px 28px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.552 4.116 1.518 5.845L.057 23.617a.75.75 0 00.92.921l5.85-1.461A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.694 9.694 0 01-4.948-1.355l-.354-.21-3.676.918.935-3.594-.23-.371A9.718 9.718 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+          Chat on WhatsApp
+        </a>
+        <button onclick="resetForm()" class="btn-secondary" style="border-radius:30px;padding:14px 28px;background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3);color:#fff;">Book Another →</button>
+      </div>
+    </div>
+
+  </div><!-- /form-wrap -->
+
+  <div class="contact-row">
+    <div class="contact-item"><div class="contact-icon" style="background:rgba(255,255,255,.15)">📱</div> +91 97908 18436</div>
+    <div class="contact-item"><div class="contact-icon" style="background:rgba(255,255,255,.15)">📧</div> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f49c9198989bb49597959080819d809d9b9ada9d9a">[email&#160;protected]</a></div>
+    <div class="contact-item"><div class="contact-icon" style="background:rgba(255,255,255,.15)">📍</div> Chennai, Tamil Nadu</div>
+    <div class="contact-item"><div class="contact-icon" style="background:rgba(37,211,102,.3)">🌍</div> https://acadapp.in</div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ── CONFIG – replace with your real WhatsApp number (no + or spaces) ── */
+const ACAD_WA_NUMBER = '919790818436';
+
+async function handleDemoSubmit(e) {
+  e.preventDefault();
+  const name    = document.getElementById('f-name').value.trim();
+  const cls     = document.getElementById('f-class').value;
+  const phone   = document.getElementById('f-phone').value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const subject = document.getElementById('f-subject').value || 'All Subjects';
+  const slot    = document.getElementById('f-slot').value   || 'Any Time';
+
+  if (!name || !phone || !email) { shakeBtn(); return; }
+
+  const btn = document.getElementById('submit-btn');
+  btn.textContent = '⏳ Booking…';
+  btn.disabled = true;
+
+  /* ── 1. Submit to Netlify Forms via fetch ── */
+  try {
+    const body = new URLSearchParams({
+      'form-name':  'demo-booking',
+      'bot-field':  '',
+      'child-name': name,
+      'class':      cls,
+      'email':      email,
+      'whatsapp':   phone,
+      'subject':    subject,
+      'slot':       slot,
+    });
+    await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
+  } catch (_) { /* form saved best-effort */ }
+
+  /* ── 2. Build WhatsApp pre-filled message ── */
+  const msg = encodeURIComponent(
+    `Hi ACAD! 👋 I'd like to book a *Free Demo Class*.\n\n` +
+    `👦 Child's Name : ${name}\n` +
+    `🎓 Class        : ${cls || 'Not specified'}\n` +
+    `📚 Subject      : ${subject}\n` +
+    `🕐 Slot         : ${slot}\n` +
+    `📧 Email        : ${email}\n\n` +
+    `Please confirm my slot. Thank you! 🙏`
+  );
+  document.getElementById('wa-link').href = `https://wa.me/${ACAD_WA_NUMBER}?text=${msg}`;
+
+  /* ── 3. Show email note in success state ── */
+  document.getElementById('success-email-note').textContent =
+    `📧 A confirmation email has been sent to ${email}`;
+
+  /* ── 4. Show success state ── */
+  document.getElementById('form-state').style.display    = 'none';
+  document.getElementById('success-state').style.display = 'block';
+
+  /* ── 5. Auto-open WhatsApp after brief delay ── */
+  setTimeout(() => { window.open(`https://wa.me/${ACAD_WA_NUMBER}?text=${msg}`, '_blank'); }, 900);
+}
+
+function resetForm() {
+  document.getElementById('f-name').value    = '';
+  document.getElementById('f-email').value   = '';
+  document.getElementById('f-phone').value   = '';
+  document.getElementById('f-class').value   = '';
+  document.getElementById('f-subject').value = '';
+  document.getElementById('f-slot').value    = '';
+  const btn = document.getElementById('submit-btn');
+  btn.textContent = 'Book My Free Demo Class 🎯';
+  btn.disabled = false;
+  document.getElementById('success-state').style.display = 'none';
+  document.getElementById('form-state').style.display    = 'block';
+}
+
+function shakeBtn() {
+  const btn = document.getElementById('submit-btn');
+  btn.style.animation = 'shake .4s ease';
+  setTimeout(() => btn.style.animation = '', 500);
+}
+</script>
+
+<!-- FOOTER -->
+<footer>
+  <div style="margin-bottom:10px;">
+    <span style="color:#fff;font-family:'Baloo 2',cursive;font-size:1.2rem;font-weight:800;">ACAD</span>
+    <span style="color:rgba(255,255,255,.5)"> Online Tuition Center — Chennai</span>
